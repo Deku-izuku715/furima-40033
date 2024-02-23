@@ -3,47 +3,47 @@
 ## usersテーブル
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
-| name                  | string | null: false |
+| nick_name             | string | null: false |
 | email                 | string | null: false, unique: true |
 | encrypted_password    | string | null: false |
-| password_confirmation | string | null: false |
-| address               | string | null: false |
-| nick_name             | string | null: false |
-| birth_date            | string | null: false |
+| last_name             | string | null: false |
+| first_name            | string | null: false |
+| last_name_kana        | string | null: false |
+| first_name_kana       | string | null: false |
+| birth_date            | date   | null: false |
 - has_many :items
-- has_many :buy_records
+- has_one :buy_record
 
 ## itemsテーブル
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| items_image        | string | null: false |
-| price              | string | null: false |
-| put_user           | string | null: false |
-| category           | string | null: false |
-| condition          | string | null: false |
-| send_money         | string | null: false |
-| send_region        | string | null: false |
-| arrive_day         | string | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| item_name          | string  | null: false |
+| item_describe      | string  | null: false |
+| category_id        | integer | null: false |
+| condition_id       | integer | null: false |
+| send_cost_id       | integer | null: false |
+| send_region_id     | integer | null: false |
+| arrive_day_id      | integer | null: false |
+| price              | integer | null: false |
 - belongs_to :user
-- has_one :buy_records
+- has_one :buy_record
+
+## addressesテーブル
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| post_code          | integer | null: false |
+| prefecture         | string  | null: false |
+| city               | string  | null: false |
+| street_address     | string  | null: false |
+| construction_name  | string  | null: false |
+| phone_number       | integer | null: false |
+- has_one :buy_record
 
 ## buy_recordsテーブル
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| price              | string | null: false |
-| buy_user           | string | null: false |
-| review             | string | null: false |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
 - belongs_to :user
-- has_one :send_reports
-
-## send_reportsテーブル
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| buy_user_address   | string | null: false |
-| put_user           | string | null: false |
-| post_code          | string | null: false |
-| prefecture         | string | null: false |
-| city               | string | null: false |
-| street_address     | string | null: false |
-| phone_number       | string | null: false |
-- has_one :buy_records
+- belongs_to :item
+- belongs_to :address
