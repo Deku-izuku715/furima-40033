@@ -30,17 +30,17 @@
 - has_one :buy_record
 
 ## addressesテーブル
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| card_number        | string  | null: false |
-| expiry             | string  | null: false |
-| cvc                | string  | null: false |
-| post_code          | string  | null: false |
-| prefecture_id      | integer | null: false |
-| city               | string  | null: false |
-| street_address     | string  | null: false |
-| construction_name  | string  |             |
-| phone_number       | string  | null: false |
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| item_name         | string     | null: false                    |
+| price             | string     | null: false                    |
+| post_code         | string     | null: false                    |
+| prefecture_id     | integer    | null: false                    |
+| city              | string     | null: false                    |
+| street_address    | string     | null: false                    |
+| construction_name | string     |                                |
+| phone_number      | string     | null: false                    |
+| buy_record        | references | null: false, foreign_key: true |
 - belongs_to :buy_record
 
 ## buy_recordsテーブル
