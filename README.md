@@ -32,8 +32,6 @@
 ## addressesテーブル
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| item_name         | string     | null: false                    |
-| price             | string     | null: false                    |
 | post_code         | string     | null: false                    |
 | prefecture_id     | integer    | null: false                    |
 | city              | string     | null: false                    |
@@ -44,10 +42,10 @@
 - belongs_to :buy_record
 
 ## buy_recordsテーブル
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| user               | references | null: false, foreign_key: true |
-| item               | references | null: false, foreign_key: true |
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| user              | references | null: false, foreign_key: true |
+| item              | references | null: false, foreign_key: true |
 - belongs_to :user
 - belongs_to :item
 - has_one :address
