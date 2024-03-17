@@ -11,6 +11,6 @@ class Item < ApplicationRecord
   end
   validates :image, presence: true
   belongs_to :user
-  has_one :buy_record
+  #has_one :buy_record
   has_one_attached :image
 end
