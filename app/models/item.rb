@@ -3,7 +3,7 @@ class Item < ApplicationRecord
     validates :item_name
     validates :item_describe
     validates :image
-    with_options numericality: { other_than: 1 , message: "can't be blank"} do
+    with_options numericality: { other_than: 1 } do
       validates :category_id
       validates :condition_id
       validates :send_cost_id
