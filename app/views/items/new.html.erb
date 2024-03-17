@@ -8,7 +8,7 @@
     <%= form_with model: @item, local: true do |f| %>
 
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <% render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/error_messages', model: f.object %>
     <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
     <%# 商品画像 %>
@@ -22,7 +22,7 @@
           クリックしてファイルをアップロード
         </p>
         <%= f.file_field :image, id:"item-image" %>
-        <%= image_tag item.image.variant(resize: '500x500'), class: 'items-image' if @item.image.attached? %>
+        <%= image_tag @item.image.variant(resize: '500x500'), class: 'item-image' if @item.image.attached? %>
       </div>
     </div>
     <%# /商品画像 %>
