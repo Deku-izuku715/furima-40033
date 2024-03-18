@@ -18,4 +18,9 @@ class Item < ApplicationRecord
   belongs_to :user
   #has_one :buy_record
   has_one_attached :image
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :send_cost
+  belongs_to :prefecture
+  belongs_to :arrive_day
 end
