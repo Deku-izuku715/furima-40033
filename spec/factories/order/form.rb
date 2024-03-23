@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :buy_record do
+  factory :order_form do
     item_id { 1 }
     user_id { 1 }
     post_code { Faker::Number.leading_zero_number(digits: 3) + "-" + Faker::Number.leading_zero_number(digits: 4) }
