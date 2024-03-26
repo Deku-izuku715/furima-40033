@@ -12,8 +12,8 @@ class OrderForm
     validates :phone_number, format: {with: /\A\d{10,11}\z/,message: "is invalid."}
     validates :token
   end
-  def save(params,user_id)
-    buy_record = BuyRecord.create(item_id: params[:item_id], user_id: user_id)
+  def save
+    buy_record = BuyRecord.create(item_id: item_id, user_id: user_id)
     Address.create(post_code: post_code, prefecture_id: prefecture_id, city: city, street_address: street_address, construction_name: construction_name, phone_number: phone_number, buy_record_id: buy_record.id)
   end
 end
