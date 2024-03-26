@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    @order_form = FactoryBot.build(:order_form)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item)
+    @order_form = FactoryBot.build(:order_form, user_id: @user.id, item_id: @item.id )
   end
   context '購入できる場合' do
     it "すべての情報があれば購入できる" do
@@ -30,9 +32,9 @@ RSpec.describe OrderForm, type: :model do
       expect(@order_form.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
     end
     it '都道府県が必須であること' do
-      @order_form.prefecture_id = ''
+      @order_form.prefecture_id = 1
       @order_form.valid?
-      expect(@order_form.errors.full_messages).to include("Prefecture can't be blank")
+      expect(@order_form.errors.full_messages).to include("Prefecture must be other than 1")
     end
     it '市区町村が必須であること' do
       @order_form.city = ''
