@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   post 'items/new', to: 'items#create'
   root to: 'items#index'
   resources :users
-  resources :items
+  resources :items do
+    resources :buy_recordes, only: [:index, :create]
+  end
 end
