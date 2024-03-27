@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    @user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item)
-    @order_form = FactoryBot.build(:order_form, user_id: @user.id, item_id: @item.id )
+    @order_form = FactoryBot.build(:order_form)
   end
   context '購入できる場合' do
     it "すべての情報があれば購入できる" do
@@ -51,10 +49,30 @@ RSpec.describe OrderForm, type: :model do
       @order_form.valid?
       expect(@order_form.errors.full_messages).to include("Phone number can't be blank")
     end
-    it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
-      @order_form.phone_number = '123456789876'
+    it '電話番号が全角数字だと保存できない' do
+      @order_form.phone_number = '２０００'
       @order_form.valid?
       expect(@order_form.errors.full_messages).to include("Phone number is invalid.")
+    end
+    it '電話番号が9桁以下では保存できない' do
+      @order_form.phone_number = '123456789'
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Phone number is invalid.")
+    end
+    it '電話番号が12桁以上では保存できない' do
+      @order_form.phone_number = '123456789123'
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Phone number is invalid.")
+    end
+    it 'userが紐付いていないと保存できない' do
+      @order_form.user_id = ''
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("User can't be blank")
+    end
+    it 'itemが紐付いていないと保存できない' do
+      @order_form.item_id = ''
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
