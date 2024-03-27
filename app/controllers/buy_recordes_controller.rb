@@ -16,7 +16,7 @@ class BuyRecordesController < ApplicationController
         card: buy_record_params[:token],
         currency: 'jpy'
       )
-      @order_form.save(params,current_user.id)
+      @order_form.save
       return redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
